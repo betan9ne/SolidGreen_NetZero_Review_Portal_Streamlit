@@ -29,7 +29,7 @@ credentials = {
             'name': 'Reviewer',
             'password': '$2b$12$oqAxkd4e/U7NRTdzU.0B3OmvB94nbTggDdJHn4Ig3J2mT3OpkhH/q'  # Password: reviewer123
         },
-        'Solidgreen': {
+        'solidgreen': {
             'name': 'Solid Green',
             'password': '$2b$12$cIanYFdIyBF7vOKryCeA/ObCtJMTI7PjUGVH2S3YZ9zQniY3wSQ9m'  # Password: Green@123
         }
