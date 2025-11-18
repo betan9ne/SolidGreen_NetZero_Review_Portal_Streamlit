@@ -13,11 +13,57 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+import streamlit_authenticator as stauth
 
 st.set_page_config(page_title="Solid Green | Net Zero (Modelled) Review", page_icon="🌿", layout="centered")
 
-st.title("🌿 Solid Green — Net Zero Carbon (Modelled) Review Portal")
-st.caption("Upload a Net Zero (Modelled) report PDF. Get a scored Excel checklist + infographic certificate automatically.")
+# -------------- Authentication Setup --------------
+# Configure authentication
+credentials = {
+    'usernames': {
+        'admin': {
+            'name': 'Admin User',
+            'password': '$2b$12$KkPOoSjUG0aU5jCv7pJGBOhebCo1RInXqAttkhHJO5A0AL486GV6C'  # Password: admin123
+        },
+        'reviewer': {
+            'name': 'Reviewer',
+            'password': '$2b$12$oqAxkd4e/U7NRTdzU.0B3OmvB94nbTggDdJHn4Ig3J2mT3OpkhH/q'  # Password: reviewer123
+        },
+        'Solidgreen': {
+            'name': 'Solid Green',
+            'password': '$2b$12$HusGyoC/XntSF4k6LPocH.vH5JRdxI00ufE3wIUf06kL2ByLXIFnG'  # Password: AaB8$5!1
+        }
+    }
+}
+
+authenticator = stauth.Authenticate(
+    credentials,
+    'solidgreen_cookie',
+    'solidgreen_netze_portal_key',
+    30  # cookie expiry days
+)
+
+# Login widget
+authenticator.login()
+
+# Check authentication status
+if st.session_state.get('authentication_status') == False:
+    st.error('Username/password is incorrect')
+    st.stop()
+elif st.session_state.get('authentication_status') == None:
+    st.warning('Please enter your username and password')
+    st.info('Demo credentials - username: `admin`, password: `admin123`')
+    st.stop()
+
+# If authenticated, show logout button below title
+if st.session_state.get('authentication_status'):
+    st.title("🌿 Solid Green — Net Zero Carbon (Modelled) Review Portal")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.write(f"**Welcome, {st.session_state.get('name')}**")
+    with col2:
+        authenticator.logout(location='main')
+    st.caption("Upload a Net Zero (Modelled) report PDF. Get a scored Excel checklist + infographic certificate automatically.")
 
 # -------------- Heuristic scoring dictionary --------------
 # Each item has: section, item, expected evidence (for Excel), and keywords to search for in PDF text to assign a score of 1 (strict) or 0
