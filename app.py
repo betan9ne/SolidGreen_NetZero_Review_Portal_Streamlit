@@ -31,7 +31,7 @@ credentials = {
         },
         'Solidgreen': {
             'name': 'Solid Green',
-            'password': '$2b$12$OTB8.nCvvMPb2VHCIUxcoeVHiKagG3gMRzwHBbCJH1xNmWggzgb3S'  # Password: ^CgSzJX8
+            'password': '$2b$12$cIanYFdIyBF7vOKryCeA/ObCtJMTI7PjUGVH2S3YZ9zQniY3wSQ9m'  # Password: Green@123
         }
     }
 }
