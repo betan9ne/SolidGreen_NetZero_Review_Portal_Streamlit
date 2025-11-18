@@ -52,7 +52,7 @@ if st.session_state.get('authentication_status') == False:
     st.stop()
 elif st.session_state.get('authentication_status') == None:
     st.warning('Please enter your username and password')
-    st.info('Demo credentials - username: `admin`, password: `admin123`')
+    # st.info('Demo credentials - username: `admin`, password: `admin123`')
     st.stop()
 
 # If authenticated, show logout button below title
